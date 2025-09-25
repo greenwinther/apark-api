@@ -19,7 +19,7 @@ async function main() {
 	const park = await prisma.park.create({
 		data: {
 			name: "Nordic Funland",
-			city: "Lidköping",
+			city: "Stockholm",
 			openedAt: new Date("2001-06-15"),
 		},
 	});
