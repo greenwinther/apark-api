@@ -1,0 +1,45 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Park {
+  id          Int          @id @default(autoincrement())
+  name        String
+  city        String
+  openedAt    DateTime
+  attractions Attraction[]
+  visits      Visit[]
+}
+
+model Attraction {
+  id           Int        @id @default(autoincrement())
+  parkId       Int
+  park         Park       @relation(fields: [parkId], references: [id], onDelete: Cascade)
+  name         String
+  type         String     // "rollercoaster" | "water" | "kids" ...
+  heightReqCm  Int
+  openedAt     DateTime
+  isActive     Boolean    @default(true)
+  queueSamples QueueSample[]
+}
+
+model Visit {
+  id        Int      @id @default(autoincrement())
+  parkId    Int
+  park      Park     @relation(fields: [parkId], references: [id], onDelete: Cascade)
+  visitDate DateTime
+  visitors  Int
+}
+
+model QueueSample {
+  id           Int         @id @default(autoincrement())
+  attractionId Int
+  attraction   Attraction  @relation(fields: [attractionId], references: [id], onDelete: Cascade)
+  sampledAt    DateTime
+  minutes      Int
+}
