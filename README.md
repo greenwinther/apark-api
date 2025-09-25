@@ -70,7 +70,7 @@ Server starts on http://localhost:3000.
 
 -   `GET /api/parks` – list all parks
 
--   `GET /api/parks?city=Lidköping` – filter by city
+-   `GET /api/parks?city=Stockholm` – filter by city
 
 -   `GET /api/parks/:id` – fetch park by ID
 
