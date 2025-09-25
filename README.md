@@ -58,6 +58,8 @@ pnpm dev
 
 Server starts on http://localhost:3000.
 
+---
+
 ## 🌐 API Endpoints
 
 ### Health
@@ -88,7 +90,9 @@ Server starts on http://localhost:3000.
 
     -   Top attractions by avg queue time
 
-## 🧪 Testing (optional)
+---
+
+## 🧪 Testing
 
 Run tests (pretest automatically resets + seeds DB):
 
@@ -96,6 +100,8 @@ Run tests (pretest automatically resets + seeds DB):
 pnpm test
 pnpm test --coverage
 ```
+
+---
 
 ## 📂 Project Structure
 
@@ -121,7 +127,7 @@ tests/
   attractions.spec.ts   # attractions per park + filter
   analytics.spec.ts     # analytics summary + top-queues
 
-# Övrigt (rotmappen)
+# Other (rotmap)
 README.md
 .env.example
 tsconfig.json
