@@ -10,13 +10,13 @@ Notera: validering sker via middleware. Läser från res.locals.validated. */
 
 export const parksRouter = Router();
 
-// GET /api/parks?city=Lidköping
+// GET /api/parks?city=Stockholm
 // Enkelt filter på city, returnerar alltid 200 med { data: [...] }
 parksRouter.get("/", async (req, res, next) => {
 	try {
 		const city = typeof req.query.city === "string" ? req.query.city : undefined;
 		const data = await prisma.park.findMany({
-			where: city ? { city } : undefined,
+			where: city ? { city: { equals: city, mode: "insensitive" } } : undefined,
 			orderBy: { id: "asc" },
 		});
 		res.json({ data });
