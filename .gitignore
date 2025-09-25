@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# builds & caches
+dist/
+coverage/
+*.log
+
+# env
+.env
+.env.local
+.env.*.local
+
+# standard från prisma
+src/generated/
+src/generated/prisma/
