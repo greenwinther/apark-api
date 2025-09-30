@@ -78,7 +78,7 @@ Server starts on http://localhost:3000.
 
 -   `GET /api/attractions/park/:parkId`
 
-    -   Optional filters: `?type=rollercoaster&active=true`
+    -   Filters: `?type=rollercoaster&active=true`
 
 ### Analytics
 
