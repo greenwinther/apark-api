@@ -31,7 +31,7 @@ if (env.NODE_ENV !== "production") {
 
 /**
  * Forcerar en DB-anslutning direkt vid uppstart (annars ansluter Prisma "lazy" vid första queryn).
- * Bra om du vill faila tidigt om DB saknas, istället för att upptäcka det vid första requesten.
+ * Bra om man vill faila tidigt om DB saknas, istället för att upptäcka det vid första requesten.
  */
 export async function connectPrisma() {
 	await prisma.$connect();
