@@ -1,4 +1,3 @@
-// src/libs/prisma.ts
 import { PrismaClient, type Prisma } from "@prisma/client";
 import { env } from "../config/env";
 
