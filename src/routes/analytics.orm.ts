@@ -18,14 +18,14 @@ analyticsOrmRouter.get(
 			const { params } = (res.locals as any).validated as { params: { parkId: number } };
 			const parkId = params.parkId;
 
-			// 1) attractions totals/active/inactive (utan rå SQL)
+			// attractions totals/active/inactive (utan rå SQL)
 			const [total, active] = await Promise.all([
 				prisma.attraction.count({ where: { parkId } }),
 				prisma.attraction.count({ where: { parkId, isActive: true } }),
 			]);
 			const inactive = total - active;
 
-			// 2) visitors YTD (utan EXTRACT)
+			// visitors YTD (utan EXTRACT)
 			const year = new Date().getFullYear();
 			const start = new Date(year, 0, 1);
 			const end = new Date(year + 1, 0, 1);
@@ -35,7 +35,7 @@ analyticsOrmRouter.get(
 			});
 			const visitorsYTD = sum._sum.visitors ?? 0;
 
-			// 3) queue statistik senaste 7 dagar
+			// queue statistik senaste 7 dagar
 			const since = new Date(Date.now() - 7 * 24 * 3600 * 1000);
 			const samples = await prisma.queueSample.findMany({
 				where: {
