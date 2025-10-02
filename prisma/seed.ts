@@ -3,8 +3,7 @@ import { PrismaClient } from "@prisma/client";
 /* Syfte:
 Seedar en minimal, deterministisk datamängd för lokal utveckling och tester.
 Körs via `prisma db seed` (och automatiskt i `prisma migrate reset`).
-Design: idempotent på logisk nivå (rader skapas från scratch på reset), små och tydliga relations-exempel.
-Tips: håll datum och siffror rimliga så analytics-endpoints ger meningsfulla värden.*/
+*/
 
 const prisma = new PrismaClient();
 
