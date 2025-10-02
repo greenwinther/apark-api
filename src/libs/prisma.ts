@@ -6,16 +6,18 @@ Dela en enda PrismaClient-instans i hela appen (singleton).
 Varför: i dev med hot-reload kan det annars bli flera instanser som öppnar många DB-anslutningar.
 */
 
-// Global cache i dev för att behålla samma instans över modul-reloads
-const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
+const isProd = env.NODE_ENV === "production";
+const isTest = env.NODE_ENV === "test";
 
 // Anpassa loggning per environment (MUTERBAR array, ej readonly tuples)
-const logLevels: Prisma.LogLevel[] =
-	env.NODE_ENV === "production"
-		? ["warn", "error"]
-		: env.NODE_ENV === "test"
-		? ["error"]
-		: ["query", "info", "warn", "error"];
+const logLevels: Prisma.LogLevel[] = isProd
+	? ["warn", "error"]
+	: isTest
+	? ["error"]
+	: ["query", "info", "warn", "error"];
+
+// Global cache i dev för att behålla samma instans över modul-reloads
+const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 export const prisma =
 	globalForPrisma.prisma ??
@@ -24,7 +26,7 @@ export const prisma =
 	});
 
 // Icke-prod: cacha instansen globalt för att undvika nya connections vid HMR/hot-reload
-if (env.NODE_ENV !== "production") {
+if (!isProd) {
 	globalForPrisma.prisma = prisma;
 }
 
